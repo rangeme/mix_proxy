@@ -23,7 +23,8 @@ Use local key file and cert file to get https flow.
 If there is a "connect" method first, then https it is.
 Else it's a http packet.
 Request to remote server with python requests lib.
-Fuction content_deal() is with a hook which can edit or save requests to somewhere.
+Function content_deal() is with a hook which can edit or save requests to somewhere.
+Function res_deal() is whith a hook which can edit response to client.
 '''
 
 
@@ -95,6 +96,7 @@ def get_res(data, connstream, https):
 
             res = requests.get(uri, headers = headers, verify = False)
             response = get_str(res)
+            response = res_deal(response)
             connstream.sendall(response)
             connstream.close()
             return
@@ -119,6 +121,7 @@ def get_res(data, connstream, https):
                 
             res = requests.post(uri, headers = headers, data = body, verify = False)
             response = get_str(res)
+            response = res_deal(response)
             connstream.sendall(response)
             connstream.close()
             return
@@ -139,6 +142,8 @@ def get_res(data, connstream, https):
         finally:
             return 
 
+def res_deal(response):
+    return response
 
 def content_deal(headers, host, method, postdata, uri):
     pass

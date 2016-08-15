@@ -19,5 +19,5 @@ Edit or save requests to somewhere.
 `openssl req -new -x509 -days 365 -nodes -out key.crt -keyout key.pem`
 
 ###Do something with content:
-fuction `content_deal(headers, host, method, postdata, uri)`  is with a hook which can edit or save requests to somewhere.
-
+function `content_deal(headers, host, method, postdata, uri)`  is with a hook which can edit or save requests to somewhere.
+function `res_deal(response)`  is whith a hook which can edit response to client.
